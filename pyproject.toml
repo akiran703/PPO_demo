@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "ppo-2"
+version = "0.1.0"
+description = ""
+authors = ["None"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+torch = "^2.3.0"
+gym = "^0.26.2"
+stable-baselines3 = "^2.3.2"
+tensorboard = "^2.16.2"
+wandb = "^0.17.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
