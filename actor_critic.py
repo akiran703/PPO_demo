@@ -23,7 +23,7 @@ class actornetwork(nn.Module):
         )
         
         self.optimizer = optim.Adam(self.parameters(), lr=alpha)
-        self.device = T.device('cuda:0' if T.cuda.is_available() else 'CPU')
+        self.device = T.device('cpu')
         self.to(self.device)
     
     #calculate a series of probablities to draw a distribution to get a actual action, then use the action to get log prob for the ratio to update 
@@ -35,7 +35,7 @@ class actornetwork(nn.Module):
 
 class criticnetwork(nn.Module):
     def __init__(self, input_dims,alpha, fc1_dims = 256, fc2_dims=256):
-        super(criticnetwork,self).__init__
+        super(criticnetwork,self).__init__()
         
         self.critic = nn.Sequential(
             nn.Linear(*input_dims,fc1_dims),
@@ -46,7 +46,7 @@ class criticnetwork(nn.Module):
         )
         
         self.optimizer = optim.Adam(self.parameters(),lr=alpha)
-        self.device = T.device('cuda:0' if T.cuda.is_available() else 'CPU')
+        self.device = T.device('cpu')
         self.to(self.device)
         
     def forward(self,state):

@@ -24,19 +24,18 @@ class Agent:
         self.memory.store_mem(state,action, probs, vals, reward, done)
     
     #function that takes observation, converts the np to a torch tensor, then pass through neural network
-    def choose_action(self,observation):
+    def choose_action(self, observation):
         state = T.tensor([observation], dtype=T.float).to(self.actor.device)
-        
-        
+
         dist = self.actor(state)
         value = self.critic(state)
         action = dist.sample()
-        
+
         probs = T.squeeze(dist.log_prob(action)).item()
         action = T.squeeze(action).item()
         value = T.squeeze(value).item()
-        
-        return probs,action,value
+
+        return action, probs, value
 
     
     def learn(self):
@@ -87,7 +86,7 @@ class Agent:
                 self.actor.optimizer.step()
                 self.critic.optimizer.step()
             
-            self.memory.clear_memory() 
+            self.memory.reset_mem() 
             
             
         
